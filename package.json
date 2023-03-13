@@ -1,27 +1,25 @@
 {
-  "name": "sae_autenticacion_ms",
-  "version": "1.0.0",
-  "description": "Proyecto SAE, Microservicio Autenticación",
+  "name": "yt_api",
+  "version": "1.2.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Arquisoft-2023/SAE_autenticacion_ms.git"
+    "dev": "nodemon src/index.js",
+    "test": ""
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Arquisoft-2023/SAE_autenticacion_ms/issues"
-  },
-  "homepage": "https://github.com/Arquisoft-2023/SAE_autenticacion_ms#readme",
+  "author": "Luis Mendez",
+  "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
-    "express": "^4.18.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "nodemon": "^2.0.6",
     "pg": "^8.10.0",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.29.3"
+    "sequelize": "^6.3.5"
   }
 }
