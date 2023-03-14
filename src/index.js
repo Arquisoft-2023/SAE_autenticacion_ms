@@ -6,7 +6,7 @@ require("dotenv").config();
 require("./models/usuario");
 const api = require("./routes/index");
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5000; // Decision del puerto
 
 // Raw Middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -15,16 +15,16 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-// Routes
+// Rutas
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to the API" });
+  res.json({ message: "Bienvenido(a) a la API AUTH del SAE. By LMZ" });
 });
-app.use("/sae", api);
+app.use("/api", api);
 
-// Server
+// Servidor
 app.listen(port, () => {
   console.log(`Listening: http://localhost:${port}`);
 });
 
-// Exports
+// Exportaciones
 module.exports = app;

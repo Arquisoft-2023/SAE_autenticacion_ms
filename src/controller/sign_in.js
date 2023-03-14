@@ -1,13 +1,13 @@
 const express = require("express");
 const usuario_model = require("../models/usuario");
 const router = express.Router();
-const { firmar_token } = require("../services/manejo_token");
+const { firmar_token } = require("../middleware/manejo_token");
 
 router.post("/signin", async (req, res) => {
   const usuario_un_in = req.body.usuario_un;
 
   if (usuario_un_in === "") {
-    return res.status(400).json({
+    return res.status(404).json({
       message: "Ningun valor fue ingresado"
     });
   } else {
@@ -28,7 +28,7 @@ router.post("/signin", async (req, res) => {
     const token = await firmar_token(usuario_find);
 
     res.status(200).json({
-      message: `Welcome back ${usuario_find.usuario_un}!`,
+      message: `Bienvenido(a) ${usuario_find.usuario_un}!`,
       usuario: usuario_find,
       token: token
     });
