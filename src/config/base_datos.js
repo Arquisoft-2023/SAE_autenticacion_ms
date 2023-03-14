@@ -1,15 +1,17 @@
 const { Sequelize } = require("sequelize");
 
+// Inicializar ORM Sequelize
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
   process.env.DB_PASS,
   {
-    host: "localhost",
+    host: process.env.DB_HOST,
     dialect: "postgres"
   }
 );
 
+// Sincronizar datos de modelo con base de datos
 sequelize.sync();
 
 (async () => {

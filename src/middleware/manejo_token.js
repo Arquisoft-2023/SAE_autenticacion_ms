@@ -9,7 +9,7 @@ const firmar_token = async (usuario) => {
       rol: usuario.rol
     },
     process.env.JWT_SECRET,
-    { expiresIn: "1m" }
+    { expiresIn: "5m" } // Tiempo de expiración del token
   );
 };
 

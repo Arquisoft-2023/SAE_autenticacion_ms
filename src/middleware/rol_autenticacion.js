@@ -1,4 +1,4 @@
-const { verificar_token } = require("../services/manejo_token");
+const { verificar_token } = require("./manejo_token");
 const modelo_usuario = require("../models/usuario");
 
 const verificar_rol = (roles) => async (req, res, next) => {

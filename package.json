@@ -1,7 +1,7 @@
 {
-  "name": "yt_api",
+  "name": "sae_autenticacion_ms",
   "version": "1.2.0",
-  "description": "",
+  "description": "api rest autenticacion para proyecto SAE",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/index.js",

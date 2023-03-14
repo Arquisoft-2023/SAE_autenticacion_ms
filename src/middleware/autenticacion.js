@@ -1,4 +1,4 @@
-const { verificar_token } = require("../services/manejo_token");
+const { verificar_token } = require("./manejo_token");
 
 const verificar_autenticacion = async (req, res, next) => {
   try {
@@ -16,7 +16,7 @@ const verificar_autenticacion = async (req, res, next) => {
   } catch (e) {
     console.log(e);
     res.status(401).json({
-      message: "No autorizado"
+      message: "No autorizado. Redireccionando a inicio...."
     });
   }
 };
