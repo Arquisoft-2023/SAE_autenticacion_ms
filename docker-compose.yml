@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  sae_autenticacion_ms:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sae_autenticacion_ms
+    container_name: sae_autenticacion_ms
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "127.0.0.3:3022:3022"
+    networks:
+      nodes-networks:
+        aliases:
+          - sae_autenticacion_ms
+
+volumes:
+  volumen_data:
+
+networks:
+  nodes-networks:
+    external: true
