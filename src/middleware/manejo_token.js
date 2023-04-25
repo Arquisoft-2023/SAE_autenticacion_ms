@@ -6,6 +6,7 @@ const firmar_token = async (usuario) => {
   return jwt.sign(
     {
       usuario_un: usuario.usuario_un,
+      estado: usuario.estado,
       rol: usuario.rol
     },
     process.env.JWT_SECRET,

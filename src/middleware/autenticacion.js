@@ -8,15 +8,18 @@ const verificar_autenticacion = async (req, res, next) => {
 
     if (token_data.usuario_un) {
       next();
+      res.send({
+        message: "Token válido"
+      });
     } else {
-      res.status(400).json({
+      res.send({
         message: "Token inválido"
       });
     }
   } catch (e) {
-    console.log(e);
-    res.status(401).json({
-      message: "No autorizado. Redireccionando a inicio...."
+    //console.log(e);
+    res.send({
+      message: "No autorizado"
     });
   }
 };

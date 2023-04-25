@@ -4,6 +4,7 @@
   "description": "api rest autenticacion para proyecto SAE",
   "main": "index.js",
   "scripts": {
+    "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "test": ""
   },

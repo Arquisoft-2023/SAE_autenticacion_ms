@@ -1,36 +1,20 @@
 const express = require("express");
-const usuario_model = require("../models/usuario");
 const router = express.Router();
 const { firmar_token } = require("../middleware/manejo_token");
 
 router.post("/signin", async (req, res) => {
-  const usuario_un_in = req.body.usuario_un;
-
-  if (usuario_un_in === "") {
-    return res.status(404).json({
-      message: "Ningun valor fue ingresado"
+  //console.log(req.body);
+  if (req.body.usuario_un && req.body.estado === true) {
+    data = req.body;
+    const token = await firmar_token(data);
+    return res.status(200).json({
+      usuario_un: req.body.usuario_un,
+      estado: req.body.estado,
+      token: token
     });
   } else {
-    const usuario_find = await usuario_model.findOne({
-      where: {
-        usuario_un: usuario_un_in,
-        estado: true
-      }
-    });
-
-    // Si usuario_un no existe
-    if (!usuario_find) {
-      return res.status(404).json({
-        message: "Usuario no encontrado"
-      });
-    }
-
-    const token = await firmar_token(usuario_find);
-
-    res.status(200).json({
-      message: `Bienvenido(a) ${usuario_find.usuario_un}!`,
-      usuario: usuario_find,
-      token: token
+    return res.status(404).json({
+      message: "Error al ingresar, revise los datos proporcionados."
     });
   }
 });
