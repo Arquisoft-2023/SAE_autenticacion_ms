@@ -6,10 +6,8 @@ Luis Fernando Mendez Marques
 # Uso/Instalación
 * Agregar un archivo .env a la raiz del proyecto con las variables:
 ```
-DB_NAME=
-DB_USER=
-DB_PASS=
-DB_HOST=
+PORT = XXX
+URI = http://XXXX
 
 #informacion de llave secreta para firmado(creacion) de token
 JWT_SECRET=
