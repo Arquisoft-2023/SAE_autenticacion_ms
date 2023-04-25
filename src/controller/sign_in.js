@@ -19,10 +19,4 @@ router.post("/signin", async (req, res) => {
   }
 });
 
-// Ruta de prueba
-router.get("/all", async (req, res) => {
-  const usuarios = await usuario_model.findAll();
-  res.status(200).json(usuarios);
-});
-
 module.exports = router;

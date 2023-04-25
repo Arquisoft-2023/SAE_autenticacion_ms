@@ -29,7 +29,7 @@ app.use(
 
 // Servidor
 app.listen(port, () => {
-  console.log(`Listening: http://localhost:${port}`);
+  console.log(`Listening on port: ${port}`);
 });
 
 // Exportaciones
