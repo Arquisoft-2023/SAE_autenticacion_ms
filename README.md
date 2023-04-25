@@ -13,13 +13,18 @@ URI = http://XXXX
 JWT_SECRET=
 ```
 
-* Abrir la consola sobre el directorio raiz del proyecto y realizar el siguiente comando:
-```
-npm install
-o
-npm i
-```
-* Para ejecutar el proyecto se usa el siguiente comando sobre la carpeta raiz:
-```
-node src/index.js
-```
+# Comandos de despliegue con docker-compose
+
+1 Si no se ha creado la red de docker para los microservicios, ejecutar el siguiente comando:
+
+    docker network create nodes-networks
+
+2 Contruir y ejecutar el contenedor:
+
+    docker-compose build --no-cache
+    
+    docker-compose up
+
+3 Detener y eliminar el contenedor:
+
+    docker-compose down
