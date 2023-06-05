@@ -3,7 +3,6 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const { verificar_autenticacion } = require("../middleware/autenticacion");
 
-//! poner el ", verificar_autenticacion"
 router.put("/signout", (req, res) => {
   const authHeader = req.headers["authorization"];
 
