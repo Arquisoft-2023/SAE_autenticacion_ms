@@ -20,17 +20,18 @@ router.post("/signin", async (req, res) => {
         });
       } else {
         console.log("No Existe en el LDAP");
-        return res.status(400).json({
-          message: "Usuario inexistente"
+        return res.status(401).json({
+          ldapRes: false,
+          message: "Credenciales Inválidas"
         });
       }
     } catch (error) {
-      return res.status(400).json({
-        message: error
+      return res.status(500).json({
+        message: `Error ${error}`
       });
     }
   } else {
-    return res.status(400).json({
+    return res.status(404).json({
       message: "Error al hacer signin"
     });
   }
