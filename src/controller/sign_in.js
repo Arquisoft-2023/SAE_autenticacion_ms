@@ -13,12 +13,11 @@ router.post("/signin", async (req, res) => {
       const isValid = await checkCredentials(username, password);
       if (isValid) {
         console.log("Existe en el LDAP");
-        let tokenFirmado = await firmar_token(username);
-        isValid = false;
+        const token = await firmar_token(username);
         return res.status(200).json({
           ldapRes: true,
           usuario_un: req.body.usuario_un,
-          token: tokenFirmado
+          token: token
         });
       } else {
         console.log("No Existe en el LDAP");
