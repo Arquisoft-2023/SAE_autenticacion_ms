@@ -1,7 +1,7 @@
 const ldapconfig = {
-  url: "ldap://sae_ldap:389/",
-  base: "dc=unal,dc=edu,dc=co",
-  dn: "cn=admin,dc=unal,dc=edu,dc=co",
+  url: "ldap://sae-ldap:389/",
+  base: "dc=sae,dc=unal,dc=edu,dc=co",
+  dn: "cn=admin,dc=sae,dc=unal,dc=edu,dc=co",
   password: "admin"
 };
 
