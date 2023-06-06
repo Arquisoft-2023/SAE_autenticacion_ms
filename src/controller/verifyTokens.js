@@ -11,11 +11,15 @@ router.post("/tokensVerify", async (req, res) => {
 
     if (JSON.stringify(decodedTokenDB) === JSON.stringify(decodedTokenLocalS)) {
       return res.status(200).json({
-        verificacion: true
+        TokenDB: tokenDb,
+        TokenLocalS: tokenLocalS,
+        verify: true
       });
     } else {
       return res.status(200).json({
-        verificacion: false
+        TokenDB: tokenDb,
+        TokenLocalS: tokenLocalS,
+        verify: false
       });
     }
   }
