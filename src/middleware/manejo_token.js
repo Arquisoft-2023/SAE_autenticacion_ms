@@ -2,12 +2,10 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 // Creación de TOKEN
-const firmar_token = async (usuario) => {
+const firmar_token = async (usuarioIn) => {
   return jwt.sign(
     {
-      usuario_un: usuario.usuario_un,
-      estado: usuario.estado,
-      rol: usuario.rol
+      usuario_un: usuarioIn
     },
     process.env.JWT_SECRET,
     { expiresIn: "10m" } // Tiempo de expiración del token
