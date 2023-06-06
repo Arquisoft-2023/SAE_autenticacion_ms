@@ -11,18 +11,16 @@ router.post("/signin", async (req, res) => {
     const password = req.body.password;
     try {
       const isValid = await checkCredentials(username, password);
-      if (isValid) {
-        console.log("Existe en el LDAP");
+      if (isValid === true) {
+        //console.log("Existe en el LDAP");
         const token = await firmar_token(username);
         return res.status(200).json({
-          ldapRes: true,
           usuario_un: req.body.usuario_un,
           token: token
         });
       } else {
-        console.log("No Existe en el LDAP");
+        //console.log("No Existe en el LDAP");
         return res.status(401).json({
-          ldapRes: false,
           message: "Credenciales Inválidas"
         });
       }
@@ -55,14 +53,48 @@ async function checkCredentials(username, password) {
   if (!user) {
     return false;
   } else {
-    const resultBind = client.bind(user.dn, password, (err) => {
-      if (err) {
-        return false;
-      } else {
-        return true;
-      }
-    });
-    return resultBind;
+    try {
+      await new Promise((resolve, reject) => {
+        client.bind(user.dn, password, (err) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
+        });
+      });
+      return true;
+    } catch (err) {
+      return false;
+    }
   }
 }
+
+// async function checkCredentials(username, password) {
+//   const SimpleLDAP = await import("simple-ldap-search").then(
+//     (module) => module.default
+//   );
+
+//   const client = ldap.createClient({
+//     url: ldapconfig.url
+//   });
+
+//   const simpleLdap = new SimpleLDAP(ldapconfig);
+
+//   const filter = `(uid=${username})`;
+//   const attributes = ["dn"];
+//   const [user] = await simpleLdap.search(filter, attributes);
+//   if (!user) {
+//     return false;
+//   } else {
+//     const resultBind = client.bind(user.dn, password, (err) => {
+//       if (err) {
+//         return false;
+//       } else {
+//         return true;
+//       }
+//     });
+//     return resultBind;
+//   }
+// }
 module.exports = router;
