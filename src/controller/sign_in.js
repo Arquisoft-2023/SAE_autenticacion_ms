@@ -11,7 +11,7 @@ router.post("/signin", async (req, res) => {
     const password = req.body.password;
     try {
       const isValid = await checkCredentials(username, password);
-      if (isValid === true) {
+      if (isValid) {
         //console.log("Existe en el LDAP");
         const token = await firmar_token(username);
         return res.status(200).json({
@@ -52,49 +52,14 @@ async function checkCredentials(username, password) {
   const [user] = await simpleLdap.search(filter, attributes);
   if (!user) {
     return false;
-  } else {
-    try {
-      await new Promise((resolve, reject) => {
-        client.bind(user.dn, password, (err) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve();
-          }
-        });
-      });
-      return true;
-    } catch (err) {
-      return false;
-    }
   }
+  client.bind(user.dn, password, (err) => {
+    if (err) {
+      return false;
+    } else {
+      return true;
+    }
+  });
+  //return resultBind;
 }
-
-// async function checkCredentials(username, password) {
-//   const SimpleLDAP = await import("simple-ldap-search").then(
-//     (module) => module.default
-//   );
-
-//   const client = ldap.createClient({
-//     url: ldapconfig.url
-//   });
-
-//   const simpleLdap = new SimpleLDAP(ldapconfig);
-
-//   const filter = `(uid=${username})`;
-//   const attributes = ["dn"];
-//   const [user] = await simpleLdap.search(filter, attributes);
-//   if (!user) {
-//     return false;
-//   } else {
-//     const resultBind = client.bind(user.dn, password, (err) => {
-//       if (err) {
-//         return false;
-//       } else {
-//         return true;
-//       }
-//     });
-//     return resultBind;
-//   }
-// }
 module.exports = router;
