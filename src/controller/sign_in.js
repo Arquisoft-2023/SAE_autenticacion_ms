@@ -16,6 +16,8 @@ router.post("/signin", async (req, res) => {
         const token = await firmar_token(username);
         isValid = false;
         return res.status(200).json({
+          ldapRes: true,
+          usuario_un: req.body.usuario_un,
           token: token
         });
       } else {
