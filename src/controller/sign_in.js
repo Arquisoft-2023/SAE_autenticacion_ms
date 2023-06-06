@@ -12,16 +12,17 @@ router.post("/signin", async (req, res) => {
     try {
       const isValid = await checkCredentials(username, password);
       if (isValid) {
-        //console.log("Existe en el LDAP");
+        console.log("Existe en el LDAP");
         const token = await firmar_token(username);
         return res.status(200).json({
-          ldapRes: "true",
+          ldapRes: true,
           usuario_un: req.body.usuario_un,
           token: token
         });
       } else {
-        //console.log("No Existe en el LDAP");
+        console.log("No Existe en el LDAP");
         return res.status(401).json({
+          ldapRes: false,
           message: "Credenciales Inválidas"
         });
       }
@@ -53,14 +54,15 @@ async function checkCredentials(username, password) {
   const [user] = await simpleLdap.search(filter, attributes);
   if (!user) {
     return false;
+  } else {
+    const resultBind = client.bind(user.dn, password, (err) => {
+      if (err) {
+        return false;
+      } else {
+        return true;
+      }
+    });
+    return resultBind;
   }
-  client.bind(user.dn, password, (err) => {
-    if (err) {
-      return false;
-    } else {
-      return true;
-    }
-  });
-  //return resultBind;
 }
 module.exports = router;
