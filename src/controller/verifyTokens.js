@@ -26,3 +26,5 @@ router.post("/tokensVerify", async (req, res) => {
     }
   }
 });
+
+module.exports = router;
