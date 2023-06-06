@@ -15,16 +15,24 @@ router.post("/signin", async (req, res) => {
         console.log("Existe en el LDAP");
         const token = await firmar_token(username);
         isValid = false;
-        return token;
+        return res.json({
+          token: token
+        });
       } else {
         console.log("No Existe en el LDAP");
-        return "Credenciales Inválidas";
+        return res.json({
+          message: "Usuario inexistente"
+        });
       }
     } catch (error) {
-      return error;
+      return res.json({
+        message: error
+      });
     }
   } else {
-    return "Error al hacer signin";
+    return res.json({
+      message: "Error al hacer signin"
+    });
   }
 });
 
