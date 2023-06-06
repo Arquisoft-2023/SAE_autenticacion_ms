@@ -6,10 +6,10 @@ require("dotenv").config();
 const api = require("./routes/index");
 const app = express();
 
-// const port = process.env.PORT || 3001;
-const port = 3001;
-// const uri = process.env.URI || "http://127.0.0.1";
-const uri = "http://127.0.0.1";
+const port = process.env.PORT || 3001;
+//const port = 3001;
+const uri = process.env.URI || "http://127.0.0.1";
+//const uri = "http://127.0.0.1";
 
 // Raw Middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -23,11 +23,11 @@ app.get("/", (req, res) => {
   res.json({ message: "Bienvenido(a) a la API AUTH del SAE" });
 });
 app.use("/auth", api);
-app.use(
-  cors({
-    origin: [`${uri}:${port}/`] // Especificar el dominio de las rutas
-  })
-);
+// app.use(
+//   cors({
+//     origin: [`${uri}:${port}/`] // Especificar el dominio de las rutas
+//   })
+// );
 
 // Servidor
 app.listen(port, () => {
