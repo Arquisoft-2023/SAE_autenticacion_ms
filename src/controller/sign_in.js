@@ -43,9 +43,9 @@ async function checkCredentials(username, password) {
     (module) => module.default
   );
 
-  const client = ldap.createClient({
-    url: ldapconfig.url
-  });
+  // const client = ldap.createClient({
+  //   url: ldapconfig.url
+  // });
 
   const simpleLdap = new SimpleLDAP(ldapconfig);
 
@@ -55,16 +55,20 @@ async function checkCredentials(username, password) {
   if (!user) {
     return false;
   } else {
-    const resultBind = client.bind(user.dn, password, (err) => {
-      if (err) {
-        return false;
-      } else {
-        return true;
-      }
-    });
-    client.destroy();
-    simpleLdap.destroy();
-    return resultBind;
+    return true;
   }
+
+  // } else {
+  //   const resultBind = client.bind(user.dn, password, (err) => {
+  //     if (err) {
+  //       return false;
+  //     } else {
+  //       return true;
+  //     }
+  //   });
+  //   client.destroy();
+  //   simpleLdap.destroy();
+  //   return resultBind;
+  // }
 }
 module.exports = router;
