@@ -5,7 +5,7 @@ const { ldapconfig } = require("../config/LDAP");
 const ldap = require("ldapjs");
 
 router.post("/signin", async (req, res) => {
-  //console.log(req.body);
+  // console.log(req.body);
   if (req.body.usuario_un && req.body.password) {
     const username = req.body.usuario_un;
     const password = req.body.password;
@@ -53,16 +53,23 @@ async function checkCredentials(username, password) {
   const attributes = ["dn"];
   const [user] = await simpleLdap.search(filter, attributes);
   if (!user) {
+    console.log("Error !USER");
     return false;
   } else {
-    const resultBind = client.bind(user.dn, password, (err) => {
-      if (err) {
-        return false;
-      } else {
-        return true;
-      }
+    return new Promise((resolve, reject) => {
+      client.bind(user.dn, password, (err) => {
+        if (err) {
+          // console.log("Error BIND: " + err);
+          resolve(false);
+          client.destroy();
+        } else {
+          resolve(true);
+          client.unbind();
+          client.destroy();
+        }
+      });
     });
-    return resultBind;
   }
 }
+
 module.exports = router;

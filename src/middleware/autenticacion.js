@@ -17,7 +17,6 @@ const verificar_autenticacion = async (req, res, next) => {
       });
     }
   } catch (e) {
-    //console.log(e);
     res.send({
       message: "No autorizado"
     });
